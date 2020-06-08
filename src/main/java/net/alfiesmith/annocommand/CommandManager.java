@@ -1,14 +1,37 @@
 package net.alfiesmith.annocommand;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Locale;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.Bukkit;
+import org.bukkit.Server;
+import org.bukkit.command.CommandMap;
 import org.bukkit.plugin.java.JavaPlugin;
 
 @RequiredArgsConstructor
 public final class CommandManager {
 
-  private final JavaPlugin plugin;
+  private final String pluginName;
+  private final CommandMap commandMap;
+
+  public CommandManager(JavaPlugin plugin) {
+    this.pluginName = plugin.getName().toLowerCase(Locale.ENGLISH);
+    CommandMap map = null;
+
+    try {
+      Server server = Bukkit.getServer();
+      Method getCommandMap = server.getClass().getDeclaredMethod("getCommandMap");
+      getCommandMap.setAccessible(true);
+      map = (CommandMap) getCommandMap.invoke(server);
+      getCommandMap.setAccessible(false);
+    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException err) {
+      err.printStackTrace();
+    }
+
+    this.commandMap = map;
+  }
 
   public void registerCommands(Object object) {
     for (Method method : object.getClass().getDeclaredMethods()) {
@@ -24,8 +47,6 @@ public final class CommandManager {
   }
 
   private void registerCommand(Command command) {
-
+    commandMap.register(command.getLabel(), pluginName, command);
   }
-
-
 }
