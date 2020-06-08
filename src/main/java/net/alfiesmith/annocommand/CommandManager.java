@@ -35,8 +35,12 @@ public final class CommandManager {
 
   public void registerCommands(Object object) {
     for (Method method : object.getClass().getDeclaredMethods()) {
-      Optional<Command> commandOp = Command.getCommand(object, method);
 
+      if (!method.isAccessible()) {
+        continue;
+      }
+
+      Optional<Command> commandOp = Command.getCommand(object, method);
       if (!commandOp.isPresent()) {
         continue;
       }
@@ -49,4 +53,5 @@ public final class CommandManager {
   private void registerCommand(Command command) {
     commandMap.register(command.getLabel(), pluginName, command);
   }
+
 }
