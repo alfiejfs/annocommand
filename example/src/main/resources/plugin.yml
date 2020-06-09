@@ -1,0 +1,7 @@
+name: AnnocommandExample
+version: 1.0
+description: Example annocommand plugin
+author: AvroVulcan
+website: https://github.com/alfiejsmith/annocommand
+main: net.example.exampleplugin.ExamplePlugin
+api-version: 1.15

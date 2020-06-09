@@ -2,6 +2,7 @@ package net.alfiesmith.annocommand;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Locale;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -36,9 +37,11 @@ public final class CommandManager {
   public void registerCommands(Object object) {
     for (Method method : object.getClass().getDeclaredMethods()) {
 
-      if (!method.isAccessible()) {
+      if (!Modifier.isPublic(method.getModifiers())) {
         continue;
       }
+
+      method.setAccessible(true);
 
       Optional<Command> commandOp = Command.getCommand(object, method);
       if (!commandOp.isPresent()) {
@@ -47,6 +50,7 @@ public final class CommandManager {
 
       Command command = commandOp.get();
       registerCommand(command);
+
     }
   }
 

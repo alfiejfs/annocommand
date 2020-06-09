@@ -67,12 +67,12 @@ public class Command extends org.bukkit.command.Command {
     }
 
     Name name = method.getAnnotation(Name.class);
-    Builder builder = new Builder(parent, method, name.name());
+    Builder builder = new Builder(parent, method, name.value());
 
     if (parameters[0].getType() == Player.class) {
       if (method.isAnnotationPresent(PlayerOnly.class)) {
         PlayerOnly playerOnly = method.getAnnotation(PlayerOnly.class);
-        builder.setPlayerOnly(playerOnly.playerOnly());
+        builder.setPlayerOnly(playerOnly.value());
       } else {
         return Optional.empty();
       }
@@ -81,33 +81,33 @@ public class Command extends org.bukkit.command.Command {
     }
 
     Parameter second = parameters[1];
-    if (second.getType() != String.class || !second.getType().isArray()) {
+    if (second.getType() != String[].class) {
       return Optional.empty();
     }
 
     if (method.isAnnotationPresent(Aliases.class)) {
       Aliases aliases = method.getAnnotation(Aliases.class);
-      builder.addAlias(aliases.aliases());
+      builder.addAlias(aliases.value());
     }
 
     if (method.isAnnotationPresent(Description.class)) {
       Description description = method.getAnnotation(Description.class);
-      builder.setDescription(description.description());
+      builder.setDescription(description.value());
     }
 
     if (method.isAnnotationPresent(Permission.class)) {
       Permission permission = method.getAnnotation(Permission.class);
-      builder.setPermission(permission.permission());
+      builder.setPermission(permission.value());
     }
 
     if (method.isAnnotationPresent(PermissionMessage.class)) {
       PermissionMessage message = method.getAnnotation(PermissionMessage.class);
-      builder.setPermissionMessage(message.permissionMessage());
+      builder.setPermissionMessage(message.value());
     }
 
     if (method.isAnnotationPresent(Usage.class)) {
       Usage usage = method.getAnnotation(Usage.class);
-      builder.setUsage(usage.usage());
+      builder.setUsage(usage.value());
     }
 
     return Optional.of(builder.build());

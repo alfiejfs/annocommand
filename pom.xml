@@ -5,15 +5,15 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>net.alfiesmith</groupId>
-  <artifactId>annocommand</artifactId>
+  <artifactId>net.alfiesmith.annocommand</artifactId>
   <version>1.0-SNAPSHOT</version>
-
   <packaging>pom</packaging>
-  <name>annocommand</name>
+
+  <name>Annocommand</name>
   <description>Simple annotation command framework (if you want something more complex, use
     https://github.com/aikar/commands)
   </description>
-  <url>https://www.github.com/alfiejsmith/annocommand</url>
+  <url>https://www.github.com/alfiejsmith/net.alfiesmith.annocommand</url>
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -40,11 +40,17 @@
       <artifactId>lombok</artifactId>
       <version>LATEST</version>
     </dependency>
+
     <dependency>
       <groupId>org.jetbrains</groupId>
       <artifactId>annotations</artifactId>
       <version>16.0.1</version>
     </dependency>
   </dependencies>
+
+  <modules>
+    <module>core</module>
+    <module>example</module>
+  </modules>
 
 </project>

@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface Description {
-  String description();
+public @interface PlayerOnly {
+  boolean value() default true;
 }
