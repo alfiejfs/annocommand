@@ -24,7 +24,6 @@ public class ExamplePlugin extends JavaPlugin {
   @Name("playercommand") @Description("A command only a player can run") @Aliases({"playercmd"}) @Usage("/playercommand")
   @Permission("playercommand.use") @PermissionMessage("You can't use this command!")
   @PlayerOnly
-
   public void playerOnlyCommand(Player player, String[] args) {
     player.sendMessage("A player ran this!");
     for (String arg : args) {

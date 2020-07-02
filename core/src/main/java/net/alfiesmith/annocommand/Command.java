@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import lombok.Getter;
+import lombok.Setter;
 import net.alfiesmith.annocommand.annotation.Aliases;
 import net.alfiesmith.annocommand.annotation.Description;
 import net.alfiesmith.annocommand.annotation.Name;
@@ -118,7 +119,9 @@ public class Command extends org.bukkit.command.Command {
     private final Object parent;
     private final Method method;
     private final String name;
+    @Setter
     private String description, usage, permission, permissionMessage;
+    @Setter
     private boolean playerOnly;
     private final List<String> aliases;
 
@@ -127,26 +130,6 @@ public class Command extends org.bukkit.command.Command {
       this.method = method;
       this.name = name;
       this.aliases = new ArrayList<>();
-    }
-
-    private void setDescription(String description) {
-      this.description = description;
-    }
-
-    private void setUsage(String usage) {
-      this.usage = usage;
-    }
-
-    private void setPermission(String permission) {
-      this.permission = permission;
-    }
-
-    private void setPermissionMessage(String permissionMessage) {
-      this.permissionMessage = permissionMessage;
-    }
-
-    private void setPlayerOnly(boolean playerOnly) {
-      this.playerOnly = playerOnly;
     }
 
     private void addAlias(String... alias) {
