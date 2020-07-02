@@ -32,7 +32,7 @@ public class ExamplePlugin extends JavaPlugin {
   }
 
   @Name("consolecommand") @Description("A command any command sender can run") @Aliases({"consolecmd"})
-  @Usage("/consolecommand") @PlayerOnly
+  @Usage("/consolecommand")
   @Permission("consolecommand.use") @PermissionMessage("You can't use this command!")
   public void consoleCommand(CommandSender sender, String[] args) {
     sender.sendMessage("A player or console ran this!");
